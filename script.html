@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Web</title>
+    <link rel="stylesheet" href="script.css">
+</head>
+
+<body>
+    <div class="card">
+        <form id="formulario">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="apellido" placeholder="Apellido" required>
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Popup de edición -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h3>Editar datos</h3>
+            <input type="text" id="edit-nombre">
+            <input type="text" id="edit-apellido">
+            <button onclick="guardarEdicion()">Guardar</button>
+            <button onclick="cerrarPopup()">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

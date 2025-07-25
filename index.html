@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- Define el lenguaje del contenido como español -->
+
+<head>
+    <meta charset="UTF-8" /> <!-- Establece la codificación de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Para que se vea bien en celulares -->
+    <title>Formulario y Tabla</title> <!-- Título que aparece en la pestaña del navegador -->
+
+    <!-- Estilos CSS -->
+    <style>
+        /* Estilo general del cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif;            /* Fuente limpia y legible */
+            background-color: #f0f2f5;                 /* Color de fondo gris claro */
+            padding: 40px;                             /* Espaciado interno alrededor del contenido */
+            display: flex;                             /* Flexbox para organizar elementos */
+            flex-direction: column;                    /* Apilar elementos verticalmente */
+            align-items: center;                       /* Centra el contenido horizontalmente */
+        }
+
+        /* Tarjeta visual que encierra el formulario */
+        .card {
+            background: #fff;                          /* Fondo blanco para contraste */
+            padding: 20px 25px;                        /* Espaciado interno */
+            border-radius: 10px;                       /* Bordes redondeados para suavidad visual */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   /* Sombra sutil para levantar la tarjeta */
+            max-width: 400px;                          /* Ancho máximo */
+            width: 100%;                               /* Que se ajuste al contenedor */
+            margin-bottom: 30px;                       /* Espacio debajo de la tarjeta */
+        }
+
+        /* Título dentro de la tarjeta */
+        .card h2 {
+            margin-top: 0;                             /* Elimina margen superior por defecto */
+            color: #333;                               /* Texto gris oscuro para contraste */
+            text-align: center;                        /* Centrado */
+        }
+
+        /* Estilo del formulario */
+        form {
+            background: #fff;                          /* Fondo blanco */
+            padding: 20px 33px;                        /* Espaciado interno */
+            border-radius: 8px;                        /* Bordes redondeados */
+            margin-bottom: 20px;                       /* Espacio debajo del formulario */
+        }
+
+        /* Estilo de los inputs de texto */
+        input[type="text"] {
+            padding: 10px;                             /* Espaciado interno */
+            width: 100%;                               /* Ancho completo del contenedor */
+            margin: 10px 0;                            /* Separación vertical entre campos */
+            border: 1px solid #ccc;                    /* Borde gris claro */
+            border-radius: 5px;                        /* Bordes redondeados */
+        }
+
+        /* Estilo general de los botones */
+        button {
+            padding: 10px 20px;                        /* Tamaño del botón */
+            background-color: #4CAF50;                 /* Color verde (éxito) */
+            color: white;                              /* Texto blanco */
+            border: none;                              /* Sin borde */
+            border-radius: 5px;                        /* Bordes redondeados */
+            cursor: pointer;                           /* Cursor tipo mano al pasar el mouse */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        button:hover {
+            background-color: #45a049;                 /* Verde un poco más oscuro */
+        }
+
+        /* Botón específico para eliminar */
+        .btn-eliminar {
+            background-color: #e74c3c;                 /* Rojo (peligro) */
+        }
+
+        /* Botón específico para editar */
+        .btn-editar {
+            background-color: #f39c12;                 /* Naranja (advertencia) */
+        }
+
+        /* Estilo general de la tabla */
+        table {
+            width: 100%;                               /* Ancho completo */
+            border-collapse: collapse;                 /* Quita espacio entre bordes */
+            background: #fff;                          /* Fondo blanco */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    /* Sombra ligera */
+        }
+
+        /* Estilo de celdas de encabezado y cuerpo */
+        th,
+        td {
+            padding: 12px;                             /* Espaciado interno en celdas */
+            border-bottom: 1px solid #ddd;             /* Línea divisoria entre filas */
+            text-align: left;                          /* Texto alineado a la izquierda */
+        }
+
+        /* Encabezados de tabla */
+        th {
+            background-color: #4CAF50;                 /* Fondo verde */
+            color: white;                              /* Texto blanco */
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <!-- Título del formulario -->
+        <h2>Formulario de Registro</h2>
+
+        <!-- Formulario para ingresar datos -->
+        <form id="formulario">
+            <!-- Etiqueta del campo -->
+            <label>Nombre:</label>
+            <!-- Campo de entrada de texto para nombre -->
+            <input type="text" id="nombre" required>
+            <!-- Etiqueta del campo -->
+            <label>Apellido:</label>
+            <!-- Campo de entrada de texto para apellido -->
+            <input type="text" id="apellido" required>
+            <!-- Botón para enviar el formulario -->
+            <button type="submit" id="btnGuardar">Registrar</button>
+        </form>
+    </div>
+
+    <!-- Título de la tabla -->
+    <h2>Listado de Registros</h2>
+
+    <!-- Tabla para mostrar los datos ingresados -->
+    <table id="tabla">
+        <!-- Encabezado de la tabla -->
+        <thead>
+            <tr>
+                <!-- Columna para número -->
+                <th>#</th>
+                <!-- Columna para el nombre -->
+                <th>Nombre</th>
+                <!-- Columna para el apellido -->
+                <th>Apellido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se insertarán filas automáticamente desde JS -->
+        </tbody>
+    </table>
+
+    <!-- Script de JavaScript para manejar el formulario -->
+    <script>
+        // Referencia al formulario HTML por su ID
+        const formulario = document.getElementById('formulario');
+        // Referencia al input de nombre
+        const nombreInput = document.getElementById('nombre');
+        // Referencia al input de apellido
+        const apellidoInput = document.getElementById('apellido');
+        // Referencia al botón de guardar/actualizar
+        const btnGuardar = document.getElementById('btnGuardar');
+        // Referencia al cuerpo de la tabla donde se insertarán filas
+        const tablaBody = document.querySelector('#tabla tbody');
+
+        // Contador para numerar cada fila registrada
+        let contador = 1;
+        // Variable que almacena la fila actualmente en edición (si la hay)
+        let filaEditando = null;
+
+        // Evento cuando se envía el formulario
+        formulario.addEventListener('submit', function (event) {
+            // Previene que se recargue la página
+            event.preventDefault();
+
+            // Obtiene y limpia los valores ingresados en los campos
+            const nombre = nombreInput.value.trim();
+            const apellido = apellidoInput.value.trim();
+
+            // Si algún campo está vacío, no hace nada
+            if (!nombre || !apellido) return;
+
+            // Si se está editando una fila existente
+            if (filaEditando) {
+                // Actualiza los valores de esa fila
+                filaEditando.cells[1].textContent = nombre;
+                filaEditando.cells[2].textContent = apellido;
+                // Limpia la variable para indicar que ya no se está editando
+                filaEditando = null;
+                // Cambia el texto del botón a "Registrar"
+                btnGuardar.textContent = 'Registrar';
+            } else {
+                // Si no se está editando, crea una nueva fila
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                <td>${contador++}</td> <!-- Número de fila -->
+                <td>${nombre}</td>      <!-- Nombre ingresado -->
+                <td>${apellido}</td>    <!-- Apellido ingresado -->
+                <td>
+                    <!-- Botones de acción -->
+                    <button class="btn-editar">Editar</button>
+                    <button class="btn-eliminar">Eliminar</button>
+                </td>
+                `;
+                // Añade la nueva fila al cuerpo de la tabla
+                tablaBody.appendChild(fila);
+            }
+
+            // Limpia los campos del formulario después de guardar
+            formulario.reset();
+        });
+
+        // Delegación de eventos para los botones de editar y eliminar dentro de la tabla
+        tablaBody.addEventListener('click', function (event) {
+            const btn = event.target;       // Elemento que disparó el evento (botón)
+            const fila = btn.closest('tr'); // Encuentra la fila a la que pertenece ese botón
+
+            // Si el botón presionado tiene clase "btn-eliminar"
+            if (btn.classList.contains('btn-eliminar')) {
+                fila.remove(); // Elimina la fila completa de la tabla
+            }
+
+            // Si el botón presionado tiene clase "btn-editar"
+            if (btn.classList.contains('btn-editar')) {
+                // Llena los campos del formulario con los datos de esa fila
+                nombreInput.value = fila.cells[1].textContent;
+                apellidoInput.value = fila.cells[2].textContent;
+                filaEditando = fila; // Marca esa fila como la que se está editando
+                btnGuardar.textContent = 'Actualizar'; // Cambia el texto del botón
+            }
+        });
+
+    </script>
+</body>
+
+</html>
